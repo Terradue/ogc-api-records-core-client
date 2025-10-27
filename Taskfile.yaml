@@ -1,0 +1,23 @@
+# keycloack-oidc-api-client (c) 2025
+#
+# keycloack-oidc-api-client is licensed under
+# Creative Commons Attribution-ShareAlike 4.0 International.
+#
+# You should have received a copy of the license along with this work.
+# If not, see <https://creativecommons.org/licenses/by-sa/4.0/>.
+
+version: '3'
+
+tasks:
+
+  install_prerequisites:
+    cmds:
+    - npm i -g @redocly/cli@latest
+    - pip install openapi-python-client
+
+  default:
+    deps:
+    - install_prerequisites
+    cmds:
+    - redocly build-docs ./docs/openapi/ogcapi-records-1-building-blocks_bundled.yaml --output=./docs/openapi/ogcapi-records-1-building-blocks.html
+    - openapi-python-client generate --meta none --path ./docs/openapi/ogcapi-records-1-building-blocks_bundled.yaml --output-path ./ogc_api_records_core_client --overwrite
